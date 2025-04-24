@@ -1,0 +1,8 @@
+target/
+node_modules/
+*.db
+*.sqlite
+.env
+.DS_Store
+/backend/target
+/frontend/.next
