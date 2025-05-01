@@ -1,1 +1,1 @@
-# MDC Artes Culinárias CRM; 
+# MDC Artes Culinárias CRM
