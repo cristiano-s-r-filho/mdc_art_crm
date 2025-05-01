@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { api } from '@/lib/api/client';
-import { useAuth } from '@/stores/auth-store';
+import { useAuthStore } from '@/stores/auth-store';
 import { useRouter } from 'next/navigation';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Loader2 } from 'lucide-react';
@@ -23,7 +23,7 @@ const registerSchema = z.object({
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { login } = useAuth();
+  const { login } = useAuthStore();
   
   const form = useForm({
     resolver: zodResolver(registerSchema),
@@ -36,15 +36,16 @@ export default function RegisterPage() {
 
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
     try {
-      const response = await api.post('/auth/register', {
+      const response = await api.post('/register', {
         email: data.email,
         password: data.password
       });
-      login(response.data.user);
+      
+      // Properly pass token and user
+      login(response.data.access_token, response.data.user);
       router.push('/dashboard');
     } catch (error) {
       form.setError('root', {
-        type: 'manual',
         message: 'Registration failed. Email may already exist.'
       });
     }
@@ -121,16 +122,15 @@ export default function RegisterPage() {
                 </p>
               )}
 
-              <Button 
-                type="submit" 
-                className="w-full" 
-                disabled={form.formState.isSubmitting}
-              >
-                {form.formState.isSubmitting ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : 'Create Account'}
-              </Button>
-
+                <Button 
+                  type="submit" 
+                  className="w-full" 
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  ) : 'Create Account'}
+                </Button>
               <div className="text-center text-sm text-muted-foreground">
                 Already have an account?{' '}
                 <Link

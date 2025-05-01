@@ -1,21 +1,15 @@
-import { ThemeProvider } from "@/components/theme-provider"
+import { HydrationWrapper } from "@/components/auth/hydration-wrapper";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
-}) { 
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <HydrationWrapper>{children}</HydrationWrapper>
       </body>
     </html>
-  )}
+  );
+}

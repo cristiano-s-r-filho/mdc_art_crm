@@ -1,14 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
+import { useAuthStore } from "@/stores/auth-store";
+import { env } from "node:process";
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  }
+    baseURL:"http://localhost:8000",
 });
 
-// Response interceptor
-api.interceptors.response.use(
-  (response) => response.data,
-  (error) => Promise.reject(error.response?.data?.message || 'Error')
-);
+// Add auth token to requests
+api.interceptors.request.use((config) => {
+  const token = useAuthStore.getState().token;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 import { api } from '../../../lib/api/client';
-import { Button } from '../../components/Button';
+import { Button } from '@/components/ui/button';
 
 interface Recipe {
   id: number;
