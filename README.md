@@ -1,8 +1,8 @@
-# MDC Art CRM
+# MDC Artes Culinárias CRM
 
 ## Overview
 
-This project is a Customer Relationship Management (CRM) system developed in Python, designed to efficiently manage data related to art collections and client interactions. While its primary function is data organization and retrieval, the development process emphasized robust data handling, user interface design, and the underlying principles of data integrity. This project demonstrates my capabilities in software development, data management, and creating functional applications, which are foundational skills for ensuring the integrity and security of information systems.
+This project is a Customer Relationship Management (CRM) system developed in Python, designed to efficiently manage data related to food-and-beverage orders and client interactions. While its primary function is data organization and retrieval, the development process emphasized robust data handling, user interface design, and the underlying principles of data integrity. This project demonstrates my capabilities in software development, data management, and creating functional applications, which are foundational skills for ensuring the integrity and security of information systems.
 
 ## Key Features & Learning Outcomes
 
